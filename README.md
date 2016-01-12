@@ -10,7 +10,7 @@ OPENJPEG/Pillow install for JPEG2000 support obtained from http://shortrecipes.b
 ### Use  pre-built image
 Download image from docker hub.
 
-    $ docker pull lorisimageserver/loris
+    $ docker pull bdlss/loris-openjpeg-docker
 
 ### Build from scratch
 Use local Dockerfile to build image.
@@ -19,14 +19,14 @@ Use local Dockerfile to build image.
 
 ### Start the container and test
 
-    $ docker run -d -p 5004:5004 lorisimageserver/loris
+    $ docker run -d -p 5004:5004 bdlss/loris-openjpeg-docker
 
 Point your browser to `http://<Host or Container IP>:5004/01/02/0001.jp2/full/full/0/default.jpg`
 
 ### Use samba to load images
 Add the images directory as a volume and mount on a Samba or sshd container. [(See svendowideit/samba)](https://registry.hub.docker.com/u/svendowideit/samba/)
 
-    $ docker run --name loris -v /usr/local/share/images -d -p 3000:3000 lorisimageserver/loris
+    $ docker run --name loris -v /usr/local/share/images -d -p 3000:3000 bdlss/loris-openjpeg-docker
     $ docker run --rm -v /usr/local/bin/docker:/docker -v /var/run/docker.sock:/docker.sock svendowideit/samba loris
     
 
@@ -37,14 +37,14 @@ Create data volume container
 
 Create two loris server containers with shared image and cache volumes    
 
-    $ docker run --name loris_server_1 --volumes-from loris_data -d lorisimageserver/loris
-    $ docker run --name loris_server_2 --volumes-from loris_data -d lorisimageserver/loris
+    $ docker run --name loris_server_1 --volumes-from loris_data -d bdlss/loris-openjpeg-docker
+    $ docker run --name loris_server_2 --volumes-from loris_data -d bdlss/loris-openjpeg-docker
     
 Build nginx image with custom config
 
     $ cd nginx
-    $ docker build -t lorisimageserver/nginx .
+    $ docker build -t bdlss/loris-openjpeg-docker .
 
 Run nginx proxy
 
-    $ docker run --name loris_proxy  --link loris_server_1:server1 --link loris_server_2:server2 -d -p 80:80 lorisimageserver/nginx
+    $ docker run --name loris_proxy  --link loris_server_1:server1 --link loris_server_2:server2 -d -p 80:80 bdlss/loris-openjpeg-docker
