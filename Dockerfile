@@ -38,10 +38,10 @@ RUN pip2.7 install configobj
 WORKDIR /tmp
 RUN wget http://downloads.sourceforge.net/project/openjpeg.mirror/2.0.1/openjpeg-2.0.1.tar.gz 
 RUN tar xzvf openjpeg-2.0.1.tar.gz
-RUN cd openjpeg-2.0.1/
-RUN cmake .
-RUN make
-RUN sudo make install
+RUN cd openjpeg-2.0.1/ \
+    && cmake . \
+    && make \
+    && sudo make install \
 
 # shortlinks for other libraries
 RUN ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ \
