@@ -5,7 +5,7 @@ MAINTAINER BDLSS, Bodleian Libraries, Oxford University <calvin.butcher@bodleian
 ENV HOME /root
 
 # Update packages and install tools 
-RUN apt-get update -y && apt-get install -y wget git unzip
+RUN apt-get update -y && apt-get install -y wget git unzip cmake make
 
 # Install pip and python libs
 RUN apt-get install -y python-dev python-setuptools python-pip
