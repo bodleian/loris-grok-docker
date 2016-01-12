@@ -41,14 +41,14 @@ RUN tar xzvf openjpeg-2.0.1.tar.gz
 RUN cd openjpeg-2.0.1/ \
     && cmake . \
     && make \
-    && sudo make install \
+    && sudo make install 
 
 # shortlinks for other libraries
 RUN ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ \
 	&& ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/ \
 	&& ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/ \
 	&& ln -s /usr/lib/`uname -i`-linux-gnu/liblcms.so /usr/lib/ \
-	&& ln -s /usr/lib/`uname -i`-linux-gnu/libtiff.so /usr/lib/ \
+	&& ln -s /usr/lib/`uname -i`-linux-gnu/libtiff.so /usr/lib/ 
 
 RUN echo "/usr/local/lib" >> /etc/ld.so.conf && ldconfig
 
