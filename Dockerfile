@@ -1,6 +1,6 @@
 FROM ubuntu:14.10
 
-MAINTAINER eliotj@princeton.edu
+MAINTAINER BDLSS, Bodleian Libraries, Oxford University <calvin.butcher@bodleian.ox.ac.uk>
 
 ENV HOME /root
 
@@ -13,15 +13,37 @@ RUN pip install --upgrade pip
 RUN pip2.7 install Werkzeug
 RUN pip2.7 install configobj
 
+
+# ******************************************************************************************
+# ******************************************************************************************
+# ******************************************************************************************
+# Forked from https://github.com/loris-imageserver/loris-docker/blob/development/Dockerfile
+# Originally worked with Kakadu (install below); forked and changed to work with OPENJPEG
+# CTB 12.1.16
+# ******************************************************************************************
+# ******************************************************************************************
+# ******************************************************************************************
+
 # Install kakadu
-WORKDIR /usr/local/lib
-RUN wget --no-check-certificate https://github.com/loris-imageserver/loris/raw/development/lib/Linux/x86_64/libkdu_v74R.so \
-	&& chmod 755 libkdu_v74R.so
+# WORKDIR /usr/local/lib
+# RUN wget --no-check-certificate https://github.com/loris-imageserver/loris/raw/development/lib/Linux/x86_64/libkdu_v74R.so \
+#	&& chmod 755 libkdu_v74R.so
+#
+# WORKDIR /usr/local/bin
+# RUN wget --no-check-certificate https://github.com/loris-imageserver/loris/raw/development/bin/Linux/x86_64/kdu_expand \
+#	&& chmod 755 kdu_expand
+#
 
-WORKDIR /usr/local/bin
-RUN wget --no-check-certificate https://github.com/loris-imageserver/loris/raw/development/bin/Linux/x86_64/kdu_expand \
-	&& chmod 755 kdu_expand
+# Install OPENJPEG
+WORKDIR /tmp
+RUN wget http://downloads.sourceforge.net/project/openjpeg.mirror/2.0.1/openjpeg-2.0.1.tar.gz 
+RUN tar xzvf openjpeg-2.0.1.tar.gz
+RUN cd openjpeg-2.0.1/
+RUN cmake .
+RUN make
+RUN sudo make install
 
+# shortlinks for other libraries
 RUN ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ \
 	&& ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/ \
 	&& ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/ \

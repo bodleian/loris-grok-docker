@@ -1,7 +1,11 @@
-Docker build of Loris IIIF Image Server
+Docker build of Loris IIIF Image Server with OPENJPEG
 ===========
 
 Docker container running [Loris IIIF Image Server](https://github.com/loris-imageserver/loris)
+
+Forked from https://github.com/loris-imageserver/loris-docker/blob/development/Dockerfile to use OPENJPEG 2.0.1.
+
+OPENJPEG/Pillow install for JPEG2000 support obtained from http://shortrecipes.blogspot.co.uk/2014/06/python-34-and-pillow-24-with-jpeg2000.html.
 
 ### Use  pre-built image
 Download image from docker hub.
