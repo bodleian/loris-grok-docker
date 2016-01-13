@@ -33,7 +33,7 @@ import transforms
 
 getcontext().prec = 25 # Decimal precision. This should be plenty.
 
-def create_app(debug=False, debug_jp2_transformer='kdu', config_file_path=''):
+def create_app(debug=False, debug_jp2_transformer='opj', config_file_path=''):
     global logger
     if debug:
         project_dp = path.dirname(path.dirname(path.realpath(__file__)))

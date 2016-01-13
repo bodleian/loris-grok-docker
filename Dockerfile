@@ -7,12 +7,20 @@ ENV HOME /root
 # Update packages and install tools 
 RUN apt-get update -y && apt-get install -y wget git unzip cmake make
 
+# Install OPENJPEG - needs to be done before installing python imaging libs
+WORKDIR /tmp
+RUN wget http://downloads.sourceforge.net/project/openjpeg.mirror/2.0.1/openjpeg-2.0.1.tar.gz 
+RUN tar xzvf openjpeg-2.0.1.tar.gz
+RUN cd openjpeg-2.0.1/ \
+    && cmake . \
+    && make \
+    && sudo make install 
+
 # Install pip and python libs
 RUN apt-get install -y python-dev python-setuptools python-pip
 RUN pip install --upgrade pip		
 RUN pip2.7 install Werkzeug
 RUN pip2.7 install configobj
-
 
 # ******************************************************************************************
 # ******************************************************************************************
@@ -33,15 +41,6 @@ RUN pip2.7 install configobj
 # RUN wget --no-check-certificate https://github.com/loris-imageserver/loris/raw/development/bin/Linux/x86_64/kdu_expand \
 #	&& chmod 755 kdu_expand
 #
-
-# Install OPENJPEG
-WORKDIR /tmp
-RUN wget http://downloads.sourceforge.net/project/openjpeg.mirror/2.0.1/openjpeg-2.0.1.tar.gz 
-RUN tar xzvf openjpeg-2.0.1.tar.gz
-RUN cd openjpeg-2.0.1/ \
-    && cmake . \
-    && make \
-    && sudo make install 
 
 # shortlinks for other libraries
 RUN ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ \
