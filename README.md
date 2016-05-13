@@ -43,7 +43,7 @@ docker exec -it <container ID> /bin/bash
 
 Then:
 
-`/tmp/iiif-validate.py -s <internal IP address>:5004 -p 'loris' -i /01/02/0001.jp2 --version=2.0 -v` 
+`/tmp/iiif-validate.py -s <internal IP address>:5004 -p '01/02' -i 0001.jp2 --version=2.0 -v` 
 
 ### Documentation and examples
 
