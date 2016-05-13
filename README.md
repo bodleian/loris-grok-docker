@@ -10,6 +10,8 @@ Build successes are logged @ https://hub.docker.com/r/bdlss/loris-openjpeg-docke
 
 Dockerfile forked from https://github.com/loris-imageserver/loris-docker/blob/development/Dockerfile and changed to use Pillow/OPENJPEG 2.0.1.
 
+IIIF validator v 1.0.0 @ https://pypi.python.org/pypi/iiif-validator/1.0.0
+
 Please also refer to https://github.com/loris-imageserver/loris/issues/61 
 
 ### Use  pre-built image
