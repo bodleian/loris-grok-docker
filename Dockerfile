@@ -5,16 +5,14 @@ MAINTAINER BDLSS, Bodleian Libraries, Oxford University <calvin.butcher@bodleian
 ENV HOME /root
 
 # Update packages and install tools 
-RUN apt-get update -y && apt-get install -y wget git unzip cmake make
+RUN apt-get update -y && apt-get install -y wget git unzip cmake make pkg-config
 
-# Install OPENJPEG - needs to be done before installing python imaging libs
-WORKDIR /tmp
-RUN wget http://downloads.sourceforge.net/project/openjpeg.mirror/2.0.1/openjpeg-2.0.1.tar.gz 
-RUN tar xzvf openjpeg-2.0.1.tar.gz
-RUN cd openjpeg-2.0.1/ \
-    && cmake . \
-    && make \
-    && sudo make install 
+# Download and compile openjpeg2.1
+WORKDIR /tmp/openjpeg
+# alt openjpeg version for stweil build
+RUN git clone https://github.com/uclouvain/openjpeg.git ./
+RUN git checkout tags/version.2.1
+RUN cmake . && make && make install
 
 # Install pip and python libs
 RUN apt-get install -y python-dev python-setuptools python-pip
@@ -56,18 +54,18 @@ RUN apt-get install -y libjpeg8 libjpeg8-dev libfreetype6 libfreetype6-dev zlib1
 RUN pip2.7 install Pillow
 
 # Install loris
-WORKDIR /opt
+RUN mkdir /opt/loris/
+WORKDIR /opt/loris/
 
-# Get loris and unzip. 
-# TODO: Move to specific tag later
-RUN wget --no-check-certificate https://github.com/loris-imageserver/loris/archive/development.zip \
-	&& unzip development.zip \
-	&& mv loris-development/ loris/ \
-	&& rm development.zip
+#RUN wget --no-check-certificate https://github.com/loris-imageserver/loris/archive/development.zip \
+#	&& unzip development.zip \
+#	&& mv loris-development/ loris/ \
+#	&& rm development.zip
+
+RUN git clone https://github.com/loris-imageserver/loris.git ./
+RUN git checkout tags/2.0.1
 
 RUN useradd -d /var/www/loris -s /sbin/false loris
-
-WORKDIR /opt/loris
 
 # Create image directory
 RUN mkdir /usr/local/share/images
