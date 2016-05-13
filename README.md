@@ -17,7 +17,7 @@ Download image from docker hub. Defaults to `latest` tag. Docker will normally r
 
     $ docker pull bdlss/loris-openjpeg-docker
 
-To run the docker command without sudo, you need to add your user (who must have root privilages) to the docker group. For this run following command:
+To run the docker command without sudo, you need to add your user (who must have root privileges) to the docker group. For this run following command:
 
 	$ sudo usermod -aG docker <user_name>
 	
