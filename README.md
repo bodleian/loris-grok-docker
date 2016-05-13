@@ -1,21 +1,30 @@
-Docker build of Loris IIIF Image Server with OPENJPEG
+Docker build of Loris 2.0.1 IIIF Image Server with OPENJPEG 2.1
 ===========
 
-Docker container running [Loris IIIF Image Server](https://github.com/loris-imageserver/loris)
 
-Forked from https://github.com/loris-imageserver/loris-docker/blob/development/Dockerfile to use OPENJPEG 2.0.1.
+A Dockfile deployment of Loris image server with OPENJPEG @ https://github.com/uclouvain/openjpeg and https://github.com/loris-imageserver/loris
 
-OPENJPEG/Pillow install for JPEG2000 support obtained from http://shortrecipes.blogspot.co.uk/2014/06/python-34-and-pillow-24-with-jpeg2000.html.
+Docker hub respository @ https://hub.docker.com/r/bdlss/loris-openjpeg-docker/
+
+Build successes are logged @ https://hub.docker.com/r/bdlss/loris-openjpeg-docker/builds/
+
+Dockerfile forked from https://github.com/loris-imageserver/loris-docker/blob/development/Dockerfile and changed to use Pillow/OPENJPEG 2.0.1.
+
+Please also refer to https://github.com/loris-imageserver/loris/issues/61 
 
 ### Use  pre-built image
-Download image from docker hub.
+Download image from docker hub. Defaults to `latest` tag. Docker will normally run as root unless otherwise configured.
 
-    $ docker pull bdlss/loris.openjpeg
+    $ docker pull bdlss/loris-openjpeg-docker
 
+To run the docker command without sudo, you need to add your user (who must have root privilages) to the docker group. For this run following command:
+
+	$ sudo usermod -aG docker <user_name>
+	
 ### Build from scratch
-Use local Dockerfile to build image.
+Use local Dockerfile to build image. Defaults to `latest` tag.
 
-    $ docker build -t your_image_name .
+    $ sudo docker build -t bdlss/loris-openjpeg-docker .
 
 ### Start the container and test
 
@@ -23,28 +32,19 @@ Use local Dockerfile to build image.
 
 Point your browser to `http://<Host or Container IP>:5004/01/02/0001.jp2/full/full/0/default.jpg`
 
-### Use samba to load images
-Add the images directory as a volume and mount on a Samba or sshd container. [(See svendowideit/samba)](https://registry.hub.docker.com/u/svendowideit/samba/)
+After starting the container, you can IIIF validate your images from the container command line:
 
-    $ docker run --name loris -v /usr/local/share/images -d -p 3000:3000 bdlss/loris.openjpeg
-    $ docker run --rm -v /usr/local/bin/docker:/docker -v /var/run/docker.sock:/docker.sock svendowideit/samba loris
-    
+To get to the container command line use:
 
-### Create loris cluster
-Create data volume container
+```bash
+docker ps
+docker exec -it <container ID> /bin/bash
+```
 
-    $ docker run --name loris_data -v /usr/local/share/images -v /var/cache/loris -d ubuntu echo Data only container for loris images and cache
+Then:
 
-Create two loris server containers with shared image and cache volumes    
+`/tmp/iiif-validator-0.9.1/iiif-validate.py -s localhost:80 -p "fcgi-bin/iipsrv.fcgi?IIIF=" -i var/www/localhost/images/67352ccc-d1b0-11e1-89ae-279075081939.jp2 --version=2.0 -v` 
 
-    $ docker run --name loris_server_1 --volumes-from loris_data -d bdlss/loris.openjpeg
-    $ docker run --name loris_server_2 --volumes-from loris_data -d bdlss/loris.openjpeg
-    
-Build nginx image with custom config
+### Documentation and examples
 
-    $ cd nginx
-    $ docker build -t bdlss/loris.openjpeg .
-
-Run nginx proxy
-
-    $ docker run --name loris_proxy  --link loris_server_1:server1 --link loris_server_2:server2 -d -p 80:80 bdlss/loris.openjpeg
+Further documentation and examples are available here https://github.com/loris-imageserver/loris-docker
