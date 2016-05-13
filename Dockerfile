@@ -77,6 +77,12 @@ RUN ./setup.py install
 COPY loris2.conf etc/loris2.conf
 COPY webapp.py loris/webapp.py
 
+# get IIIF validator
+WORKDIR /tmp
+RUN wget --no-check-certificate https://pypi.python.org/packages/source/i/iiif-validator/iiif-validator-0.9.1.tar.gz \
+	&& tar zxfv iiif-validator-0.9.1.tar.gz \
+	&& rm iiif-validator-0.9.1.tar.gz
+	
 # run
 WORKDIR /opt/loris/loris
 
