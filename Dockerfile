@@ -77,6 +77,7 @@ RUN ./setup.py install
 COPY loris2.conf etc/loris2.conf
 COPY webapp.py loris/webapp.py
 
+# run
 WORKDIR /opt/loris/loris
 
 EXPOSE 5004
