@@ -47,6 +47,10 @@ Then for an image served at `http://localhost:5004/prefix/image_id` the validato
 
     $ /tmp/iiif-validate.py -s localhost:5004 -p prefix -i image_id --version=2.0 -v
 
+e.g.
+
+    $ /tmp/iiif-validate.py -s localhost:5004 -p '01/02' -i 0001.jp2 --version=2.0 -v
+
 ### Documentation and examples
 
 Further documentation and examples are available here https://github.com/loris-imageserver/loris-docker
