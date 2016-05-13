@@ -43,7 +43,7 @@ docker exec -it <container ID> /bin/bash
 
 Then:
 
-`/tmp/iiif-validator-0.9.1/iiif-validate.py -s localhost:80 -p "fcgi-bin/iipsrv.fcgi?IIIF=" -i var/www/localhost/images/67352ccc-d1b0-11e1-89ae-279075081939.jp2 --version=2.0 -v` 
+`/tmp/iiif-validate.py -s <internal IP address>:5004 -p 'loris' -i /01/02/0001.jp2 --version=2.0 -v` 
 
 ### Documentation and examples
 
