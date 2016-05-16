@@ -30,7 +30,7 @@ Use local Dockerfile to build image. Defaults to `latest` tag.
 
 ### Start the container and test
 
-    $ docker run -d -p 5004:5004 bdlss/loris.openjpeg
+    $ docker run -d -p 5004:5004 bdlss/loris-openjpeg-docker
 
 Point your browser to `http://<Host or Container IP>:5004/01/02/0001.jp2/full/full/0/default.jpg`
 
