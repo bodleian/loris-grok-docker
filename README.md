@@ -1,4 +1,4 @@
-Docker build of Loris 2.0.1 IIIF Image Server with Grok 1.0
+Docker build of Loris 2.0.1 IIIF Image Server with Grok 1.0 on Ubuntu 14.04
 ===========
 
 
