@@ -5,7 +5,7 @@ MAINTAINER BDLSS, Bodleian Libraries, Oxford University <calvin.butcher@bodleian
 ENV HOME /root
 
 # Update packages and install tools 
-RUN apt-get update -y && apt-get install -y wget git unzip make pkg-config
+RUN apt-get update -y && apt-get install -y wget git gcc g++ unzip make pkg-config
 
 # Install cmake 3.2
 WORKDIR /tmp/cmake
