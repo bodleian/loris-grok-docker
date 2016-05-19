@@ -9,9 +9,7 @@ RUN apt-get update -y && apt-get install -y wget git unzip cmake make pkg-config
 
 # Download and compile openjpeg2.1
 WORKDIR /tmp/openjpeg
-# alt openjpeg version for stweil build
-RUN git clone https://github.com/uclouvain/openjpeg.git ./
-RUN git checkout tags/version.2.1
+RUN git clone https://github.com/GrokImageCompression/grok.git ./
 RUN cmake . && make && make install
 
 # Install pip and python libs
