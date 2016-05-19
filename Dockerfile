@@ -4,6 +4,8 @@ MAINTAINER BDLSS, Bodleian Libraries, Oxford University <calvin.butcher@bodleian
 
 ENV HOME /root
 
+# add repo for cmake 3.2
+RUN apt-get install software-properties-common && add-apt-repository ppa:george-edison55/cmake-3.x
 # Update packages and install tools 
 RUN apt-get update -y && apt-get install -y wget git unzip cmake make pkg-config
 
