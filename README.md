@@ -12,7 +12,7 @@ Dockerfile forked from https://github.com/loris-imageserver/loris-docker/blob/de
 
 IIIF validator v 1.0.0 @ https://pypi.python.org/pypi/iiif-validator/1.0.0
 
-Please also refer to https://github.com/loris-imageserver/loris/issues/61 
+Please also refer to https://github.com/loris-imageserver/loris/issues/61 and https://github.com/ruven/iipsrv/pull/61#issuecomment-222381601
 
 ### Use  pre-built image
 Download image from docker hub. Defaults to `latest` tag. Docker will normally run as root unless otherwise configured.
