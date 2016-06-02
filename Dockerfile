@@ -54,7 +54,8 @@ RUN echo "/usr/local/lib" >> /etc/ld.so.conf && ldconfig
 
 # Install Pillow
 RUN apt-get install -y libjpeg8 libjpeg8-dev libfreetype6 libfreetype6-dev zlib1g-dev liblcms2-2 liblcms2-dev liblcms2-utils libtiff5-dev
-RUN pip2.7 install Pillow
+# Grok doesn't like Pillow CTB 020616
+#RUN pip2.7 install Pillow
 
 # Install loris
 RUN mkdir /opt/loris/
@@ -80,11 +81,12 @@ RUN ./setup.py install
 COPY loris2.conf etc/loris2.conf
 COPY webapp.py loris/webapp.py
 
+# Grok doesn't like Pillow, validation isn't going to work CTB 020616 
 # get IIIF validator
-WORKDIR /tmp
-RUN wget --no-check-certificate https://pypi.python.org/packages/source/i/iiif-validator/iiif-validator-1.0.0.tar.gz \
-	&& tar zxfv iiif-validator-1.0.0.tar.gz \
-	&& rm iiif-validator-1.0.0.tar.gz
+#WORKDIR /tmp
+#RUN wget --no-check-certificate https://pypi.python.org/packages/source/i/iiif-validator/iiif-validator-1.0.0.tar.gz \
+#	&& tar zxfv iiif-validator-1.0.0.tar.gz \
+#	&& rm iiif-validator-1.0.0.tar.gz
 	
 # run
 WORKDIR /opt/loris/loris
