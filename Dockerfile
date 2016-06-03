@@ -14,7 +14,7 @@ RUN wget http://www.cmake.org/files/v3.2/cmake-3.2.2.tar.gz && tar xf cmake-3.2.
 # Download and compile openjpeg2.1
 WORKDIR /tmp/openjpeg
 RUN git clone https://github.com/GrokImageCompression/grok.git ./
-RUN git checkout master
+RUN git checkout tags/v2.1.1
 RUN cmake -DCMAKE_BUILD_TYPE=Release . && make && make install
 
 # Install pip and python libs
