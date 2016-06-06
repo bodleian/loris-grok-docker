@@ -11,6 +11,14 @@ RUN apt-get update -y && apt-get install -y wget git gcc g++ unzip make pkg-conf
 WORKDIR /tmp/cmake
 RUN wget http://www.cmake.org/files/v3.2/cmake-3.2.2.tar.gz && tar xf cmake-3.2.2.tar.gz && cd cmake-3.2.2 && ./configure && make && make install
 
+# Install Pillow and make temporary amendments for compatibility for Grok 1.0
+WORKDIR /tmp/pillow
+RUN wget https://pypi.python.org/packages/e2/af/0a3981fffc5cd43078eb8b1057702e0dd2d5771e5aaa36cbd140e32f8473/Pillow-3.2.0.tar.gz#md5=7cfd093c11205d9e2ebe3c51dfcad510
+# copy over hacked files
+COPY Jpeg2kDecode.c /tmp/pillow/Pillow-3.2.0/libImaging
+COPY Jpeg2kEncode.c /tmp/pillow/Pillow-3.2.0/libImaging
+RUN cd /tmp/pillow/Pillow-3.2.0 && make && make install
+
 # Download and compile openjpeg2.1
 WORKDIR /tmp/openjpeg
 RUN git clone https://github.com/GrokImageCompression/grok.git ./
