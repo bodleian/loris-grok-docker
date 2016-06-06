@@ -13,16 +13,6 @@ RUN pip install --upgrade pip
 RUN pip2.7 install Werkzeug
 RUN pip2.7 install configobj
 
-# Install Pillow and make temporary amendments for compatibility for Grok 1.0
-WORKDIR /tmp/pillow
-RUN apt-get install -y libjpeg8 libjpeg8-dev libfreetype6 libfreetype6-dev zlib1g-dev liblcms2-2 liblcms2-dev liblcms2-utils libtiff5-dev
-RUN wget https://pypi.python.org/packages/e2/af/0a3981fffc5cd43078eb8b1057702e0dd2d5771e5aaa36cbd140e32f8473/Pillow-3.2.0.tar.gz#md5=7cfd093c11205d9e2ebe3c51dfcad510
-RUN tar zxfv Pillow-3.2.0.tar.gz && rm Pillow-3.2.0.tar.gz
-# copy over hacked files
-COPY Jpeg2kDecode.c /tmp/pillow/Pillow-3.2.0/libImaging
-COPY Jpeg2kEncode.c /tmp/pillow/Pillow-3.2.0/libImaging
-RUN cd /tmp/pillow/Pillow-3.2.0 && make && make install
-
 # Install cmake 3.2
 WORKDIR /tmp/cmake
 RUN wget http://www.cmake.org/files/v3.2/cmake-3.2.2.tar.gz && tar xf cmake-3.2.2.tar.gz && cd cmake-3.2.2 && ./configure && make && make install
@@ -32,6 +22,16 @@ WORKDIR /tmp/openjpeg
 RUN git clone https://github.com/GrokImageCompression/grok.git ./
 RUN git checkout tags/v2.1.1
 RUN cmake -DCMAKE_BUILD_TYPE=Release . && make && make install
+
+# Install Pillow and make temporary amendments for compatibility for Grok 1.0
+WORKDIR /tmp/pillow
+RUN apt-get install -y libjpeg8 libjpeg8-dev libfreetype6 libfreetype6-dev zlib1g-dev liblcms2-2 liblcms2-dev liblcms2-utils libtiff5-dev
+RUN wget https://pypi.python.org/packages/e2/af/0a3981fffc5cd43078eb8b1057702e0dd2d5771e5aaa36cbd140e32f8473/Pillow-3.2.0.tar.gz#md5=7cfd093c11205d9e2ebe3c51dfcad510
+RUN tar zxfv Pillow-3.2.0.tar.gz && rm Pillow-3.2.0.tar.gz
+# copy over hacked files
+COPY Jpeg2kDecode.c /tmp/pillow/Pillow-3.2.0/libImaging
+COPY Jpeg2kEncode.c /tmp/pillow/Pillow-3.2.0/libImaging
+RUN cd /tmp/pillow/Pillow-3.2.0 && make && make install
 
 # ******************************************************************************************
 # ******************************************************************************************
