@@ -15,6 +15,7 @@ RUN pip2.7 install configobj
 
 # Install Pillow and make temporary amendments for compatibility for Grok 1.0
 WORKDIR /tmp/pillow
+RUN apt-get install -y libjpeg8 libjpeg8-dev libfreetype6 libfreetype6-dev zlib1g-dev liblcms2-2 liblcms2-dev liblcms2-utils libtiff5-dev
 RUN wget https://pypi.python.org/packages/e2/af/0a3981fffc5cd43078eb8b1057702e0dd2d5771e5aaa36cbd140e32f8473/Pillow-3.2.0.tar.gz#md5=7cfd093c11205d9e2ebe3c51dfcad510
 RUN tar zxfv Pillow-3.2.0.tar.gz && rm Pillow-3.2.0.tar.gz
 # copy over hacked files
@@ -62,7 +63,7 @@ RUN ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ \
 RUN echo "/usr/local/lib" >> /etc/ld.so.conf && ldconfig
 
 # Install Pillow
-RUN apt-get install -y libjpeg8 libjpeg8-dev libfreetype6 libfreetype6-dev zlib1g-dev liblcms2-2 liblcms2-dev liblcms2-utils libtiff5-dev
+#RUN apt-get install -y libjpeg8 libjpeg8-dev libfreetype6 libfreetype6-dev zlib1g-dev liblcms2-2 liblcms2-dev liblcms2-utils libtiff5-dev
 # Grok doesn't like Pillow, compiled and templated above CTB 060616
 #RUN pip2.7 install Pillow
 
