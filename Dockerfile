@@ -29,9 +29,9 @@ RUN apt-get install -y libjpeg8 libjpeg8-dev libfreetype6 libfreetype6-dev zlib1
 RUN wget https://pypi.python.org/packages/e2/af/0a3981fffc5cd43078eb8b1057702e0dd2d5771e5aaa36cbd140e32f8473/Pillow-3.2.0.tar.gz#md5=7cfd093c11205d9e2ebe3c51dfcad510
 RUN tar zxfv Pillow-3.2.0.tar.gz && rm Pillow-3.2.0.tar.gz
 # copy over hacked files
-RUN rm /tmp/pillow/Pillow-3.2.0/libImaging/Jpeg2kDecode.c && rm /tmp/pillow/Pillow-3.2.0/libImaging/Jpeg2kEncode.c
-COPY Jpeg2kDecode.c /tmp/pillow/Pillow-3.2.0/libImaging/
-COPY Jpeg2kEncode.c /tmp/pillow/Pillow-3.2.0/libImaging/
+RUN rm /tmp/pillow/Pillow-3.2.0/libImaging/Jpeg2KDecode.c && rm /tmp/pillow/Pillow-3.2.0/libImaging/Jpeg2KEncode.c
+COPY Jpeg2KDecode.c /tmp/pillow/Pillow-3.2.0/libImaging/
+COPY Jpeg2KEncode.c /tmp/pillow/Pillow-3.2.0/libImaging/
 RUN cd /tmp/pillow/Pillow-3.2.0 && make && make install
 
 # ******************************************************************************************
