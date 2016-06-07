@@ -26,6 +26,16 @@ RUN cmake -DCMAKE_BUILD_TYPE=Release . && make && make install
 # Install Pillow and make temporary amendments for compatibility for Grok 1.0
 WORKDIR /tmp/pillow
 RUN apt-get install -y libjpeg8 libjpeg8-dev libfreetype6 libfreetype6-dev zlib1g-dev liblcms2-2 liblcms2-dev liblcms2-utils libtiff5-dev
+
+# shortlinks for other libraries
+RUN ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ \
+	&& ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/ \
+	&& ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/ \
+	&& ln -s /usr/lib/`uname -i`-linux-gnu/liblcms.so /usr/lib/ \
+	&& ln -s /usr/lib/`uname -i`-linux-gnu/libtiff.so /usr/lib/ 
+
+RUN echo "/usr/local/lib" >> /etc/ld.so.conf && ldconfig
+
 RUN wget https://pypi.python.org/packages/e2/af/0a3981fffc5cd43078eb8b1057702e0dd2d5771e5aaa36cbd140e32f8473/Pillow-3.2.0.tar.gz#md5=7cfd093c11205d9e2ebe3c51dfcad510
 RUN tar zxfv Pillow-3.2.0.tar.gz && rm Pillow-3.2.0.tar.gz
 # copy over hacked files
@@ -53,15 +63,6 @@ RUN cd /tmp/pillow/Pillow-3.2.0 && make && make install
 # RUN wget --no-check-certificate https://github.com/loris-imageserver/loris/raw/development/bin/Linux/x86_64/kdu_expand \
 #	&& chmod 755 kdu_expand
 #
-
-# shortlinks for other libraries
-RUN ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ \
-	&& ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/ \
-	&& ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/ \
-	&& ln -s /usr/lib/`uname -i`-linux-gnu/liblcms.so /usr/lib/ \
-	&& ln -s /usr/lib/`uname -i`-linux-gnu/libtiff.so /usr/lib/ 
-
-RUN echo "/usr/local/lib" >> /etc/ld.so.conf && ldconfig
 
 # Install Pillow
 #RUN apt-get install -y libjpeg8 libjpeg8-dev libfreetype6 libfreetype6-dev zlib1g-dev liblcms2-2 liblcms2-dev liblcms2-utils libtiff5-dev
