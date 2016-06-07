@@ -36,14 +36,14 @@ RUN ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ \
 
 RUN echo "/usr/local/lib" >> /etc/ld.so.conf && ldconfig
 
-RUN wget https://pypi.python.org/packages/e2/af/0a3981fffc5cd43078eb8b1057702e0dd2d5771e5aaa36cbd140e32f8473/Pillow-3.2.0.tar.gz#md5=7cfd093c11205d9e2ebe3c51dfcad510
-RUN tar zxfv Pillow-3.2.0.tar.gz && rm Pillow-3.2.0.tar.gz
+RUN git clone https://github.com/python-pillow/Pillow.git ./
+RUN git checkout tags/3.2.0
 # copy over hacked files
-RUN rm /tmp/pillow/Pillow-3.2.0/libImaging/Jpeg2KDecode.c && rm /tmp/pillow/Pillow-3.2.0/libImaging/Jpeg2KEncode.c
-COPY Jpeg2KDecode.c /tmp/pillow/Pillow-3.2.0/libImaging/
-COPY Jpeg2KEncode.c /tmp/pillow/Pillow-3.2.0/libImaging/
-RUN chmod 777 /tmp/pillow/Pillow-3.2.0/libImaging/Jpeg2KDecode.c && chmod 777 /tmp/pillow/Pillow-3.2.0/libImaging/Jpeg2KEncode.c
-RUN cd /tmp/pillow/Pillow-3.2.0 && make && make install
+RUN rm /tmp/pillow/libImaging/Jpeg2KDecode.c && rm /tmp/pillow/libImaging/Jpeg2KEncode.c
+COPY Jpeg2KDecode.c /tmp/pillow/libImaging/
+COPY Jpeg2KEncode.c /tmp/pillow/libImaging/
+RUN chmod 777 /tmp/pillow/libImaging/Jpeg2KDecode.c && chmod 777 /tmp/pillow/libImaging/Jpeg2KEncode.c
+RUN cd /tmp/pillow && make && make install
 
 # ******************************************************************************************
 # ******************************************************************************************
