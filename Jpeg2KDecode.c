@@ -571,7 +571,7 @@ j2k_decode_entry(Imaging im, ImagingCodecState state,
 
 
     /* Forcing the 3 param call for now CTB 060616 */
-    opj_stream_set_user_data(stream, encoder, NULL);
+    opj_stream_set_user_data(stream, decoder, NULL);
 
     /* Hack: if we don't know the length, the largest file we can
        possibly support is 4GB.  We can't go larger than this, because
