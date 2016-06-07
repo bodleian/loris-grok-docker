@@ -42,6 +42,7 @@ RUN tar zxfv Pillow-3.2.0.tar.gz && rm Pillow-3.2.0.tar.gz
 RUN rm /tmp/pillow/Pillow-3.2.0/libImaging/Jpeg2KDecode.c && rm /tmp/pillow/Pillow-3.2.0/libImaging/Jpeg2KEncode.c
 COPY Jpeg2KDecode.c /tmp/pillow/Pillow-3.2.0/libImaging/
 COPY Jpeg2KEncode.c /tmp/pillow/Pillow-3.2.0/libImaging/
+RUN chmod 777 /tmp/pillow/Pillow-3.2.0/libImaging/Jpeg2KDecode.c && chmod 777 /tmp/pillow/Pillow-3.2.0/libImaging/Jpeg2KEncode.c
 RUN cd /tmp/pillow/Pillow-3.2.0 && make && make install
 
 # ******************************************************************************************
