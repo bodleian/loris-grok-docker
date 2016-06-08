@@ -25,7 +25,7 @@ RUN cmake -DCMAKE_BUILD_TYPE=Release . && make && make install
 
 # Install Pillow and make temporary amendments for compatibility for Grok 1.0
 WORKDIR /tmp/pillow
-RUN apt-get install -y libjpeg8 libjpeg8-dev libfreetype6 libfreetype6-dev zlib1g-dev liblcms2-2 liblcms2-dev liblcms2-utils libtiff5-dev
+RUN apt-get install -y libpng-dev libjpeg8 libjpeg8-dev libfreetype6 libfreetype6-dev zlib1g-dev liblcms2-2 liblcms2-dev liblcms2-utils libtiff5-dev
 
 # shortlinks for other libraries
 RUN ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ \
