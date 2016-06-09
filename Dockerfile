@@ -84,12 +84,11 @@ RUN ./setup.py install
 COPY loris2.conf etc/loris2.conf
 COPY webapp.py loris/webapp.py
 
-# Grok doesn't like Pillow, validation isn't going to work CTB 020616 
 # get IIIF validator
-#WORKDIR /tmp
-#RUN wget --no-check-certificate https://pypi.python.org/packages/source/i/iiif-validator/iiif-validator-1.0.0.tar.gz \
-#	&& tar zxfv iiif-validator-1.0.0.tar.gz \
-#	&& rm iiif-validator-1.0.0.tar.gz
+WORKDIR /tmp
+RUN wget --no-check-certificate https://pypi.python.org/packages/source/i/iiif-validator/iiif-validator-1.0.0.tar.gz \
+	&& tar zxfv iiif-validator-1.0.0.tar.gz \
+	&& rm iiif-validator-1.0.0.tar.gz
 	
 # run
 WORKDIR /opt/loris/loris
