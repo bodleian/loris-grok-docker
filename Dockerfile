@@ -55,20 +55,9 @@ RUN echo "/usr/local/lib" >> /etc/ld.so.conf && ldconfig
 #	&& chmod 755 kdu_expand
 #
 
-# Install Pillow
-#RUN apt-get install -y libjpeg8 libjpeg8-dev libfreetype6 libfreetype6-dev zlib1g-dev liblcms2-2 liblcms2-dev liblcms2-utils libtiff5-dev
-# Grok doesn't like Pillow, compiled and templated above CTB 060616
-#RUN pip2.7 install Pillow
-
 # Install loris
 RUN mkdir /opt/loris/
 WORKDIR /opt/loris/
-
-#RUN wget --no-check-certificate https://github.com/loris-imageserver/loris/archive/development.zip \
-#	&& unzip development.zip \
-#	&& mv loris-development/ loris/ \
-#	&& rm development.zip
-
 RUN git clone https://github.com/loris-imageserver/loris.git ./
 RUN git checkout tags/2.0.1
 
