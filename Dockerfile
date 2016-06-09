@@ -38,12 +38,7 @@ RUN echo "/usr/local/lib" >> /etc/ld.so.conf && ldconfig
 
 RUN git clone https://github.com/python-pillow/Pillow.git ./
 RUN git checkout tags/3.2.0
-# copy over hacked files
-RUN rm /tmp/pillow/libImaging/Jpeg2KDecode.c && rm /tmp/pillow/libImaging/Jpeg2KEncode.c
-COPY Jpeg2KDecode.c /tmp/pillow/libImaging/
-COPY Jpeg2KEncode.c /tmp/pillow/libImaging/
-RUN chmod 777 /tmp/pillow/libImaging/Jpeg2KDecode.c && chmod 777 /tmp/pillow/libImaging/Jpeg2KEncode.c
-RUN cd /tmp/pillow && make && make install
+RUN make && make install
 
 # ******************************************************************************************
 # ******************************************************************************************
