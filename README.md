@@ -51,6 +51,23 @@ e.g.
 
     $ /tmp/iiif-validate.py -s localhost:5004 -p '01/02' -i 0001.jp2 --version=2.0 -v
 
+After starting the container, you can IIIF validate your images from the container command line:
+
+To get to the container command line use:
+
+```bash
+sudo docker ps
+sudo docker exec -it <container ID> /bin/bash
+```
+
+Then for an image served at `http://localhost:5004/<prefix>/<image_id>` the validator can be run with:
+
+    $ python /tmp/iiif-validator-1.0.0/iiif-validate.py -s localhost:5004 -p <prefix> -i <image_id> --version=2.0 -v
+
+e.g.
+
+    $ python /tmp/iiif-validator-1.0.0/iiif-validate.py -s localhost:5004 -p '01/02' -i 0001.jp2 --version=2.0 -v
+
 ### Documentation and examples
 
 Further documentation and examples are available here https://github.com/loris-imageserver/loris-docker
