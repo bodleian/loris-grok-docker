@@ -19,13 +19,13 @@ RUN wget http://www.cmake.org/files/v3.2/cmake-3.2.2.tar.gz && tar xf cmake-3.2.
 
 # Download and compile openjpeg2.1
 WORKDIR /tmp/openjpeg
+RUN apt-get install -y libpng-dev libjpeg8 libjpeg8-dev libfreetype6 libfreetype6-dev zlib1g-dev liblcms2-2 liblcms2-dev liblcms2-utils libtiff5-dev
 RUN git clone https://github.com/GrokImageCompression/grok.git ./
 RUN git checkout tags/v2.1.1
 RUN cmake -DCMAKE_BUILD_TYPE=Release . && make && make install
 
 # Install Pillow and make temporary amendments for compatibility for Grok 1.0
 WORKDIR /tmp/pillow
-RUN apt-get install -y libpng-dev libjpeg8 libjpeg8-dev libfreetype6 libfreetype6-dev zlib1g-dev liblcms2-2 liblcms2-dev liblcms2-utils libtiff5-dev
 
 # shortlinks for other libraries
 RUN ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ \
