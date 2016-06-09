@@ -23,8 +23,7 @@ RUN git clone https://github.com/GrokImageCompression/grok.git ./
 RUN git checkout tags/v2.1.1
 RUN cmake -DCMAKE_BUILD_TYPE=Release . && make && make install
 
-# Install Pillow and make temporary amendments for compatibility for Grok 1.0
-WORKDIR /tmp/pillow
+# install graphic libraries
 RUN apt-get install -y libpng-dev libjpeg8 libjpeg8-dev libfreetype6 libfreetype6-dev zlib1g-dev liblcms2-2 liblcms2-dev liblcms2-utils libtiff5-dev
 
 # shortlinks for other libraries
@@ -35,10 +34,6 @@ RUN ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ \
 	&& ln -s /usr/lib/`uname -i`-linux-gnu/libtiff.so /usr/lib/ 
 
 RUN echo "/usr/local/lib" >> /etc/ld.so.conf && ldconfig
-
-RUN git clone https://github.com/python-pillow/Pillow.git ./
-RUN git checkout tags/3.2.0
-RUN make && make install
 
 # ******************************************************************************************
 # ******************************************************************************************
