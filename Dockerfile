@@ -8,7 +8,7 @@ ENV HOME /root
 RUN apt-get update -y && apt-get install -y wget git gcc g++ unzip make pkg-config
 
 # Install pip and python libs
-RUN apt-get install -y python-dev python-setuptools python-pip
+RUN apt-get install -y python-dev python-setuptools python-pip build-essential libxml2-dev libxslt1-dev
 RUN pip install --upgrade pip		
 RUN pip2.7 install Werkzeug
 RUN pip2.7 install configobj
@@ -83,6 +83,12 @@ RUN cp -R tests/img/* /usr/local/share/images/
 RUN ./setup.py install 
 COPY loris2.conf etc/loris2.conf
 COPY webapp.py loris/webapp.py
+
+# get python validator framework
+RUN easy_install pip \
+    && pip install bottle \
+    && pip install python-magic \
+    && pip install lxml \
 
 # get IIIF validator
 WORKDIR /tmp
