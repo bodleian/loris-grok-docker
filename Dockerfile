@@ -74,10 +74,9 @@ COPY loris2.conf etc/loris2.conf
 COPY webapp.py loris/webapp.py
 
 # get python validator framework
-RUN easy_install pip \
-    && pip install bottle \
-    && pip install python-magic \
-    && pip install lxml \
+RUN pip2.7 install bottle \
+    && pip2.7 install python-magic \
+    && pip2.7 install lxml \
 
 # get IIIF validator
 WORKDIR /tmp
