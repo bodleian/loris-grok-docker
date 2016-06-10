@@ -34,6 +34,10 @@ Use local Dockerfile to build image. Defaults to `latest` tag.
 
 Point your browser to `http://<Host or Container IP>:5004/01/02/0001.jp2/full/full/0/default.jpg`
 
+e.g.
+
+`http://localhost:5004/01/02/0001.jp2/full/full/0/default.jpg`
+
 After starting the container, you can IIIF validate your images from the container command line:
 
 To get to the container command line use:
