@@ -28,9 +28,15 @@ Use local Dockerfile to build image. Defaults to `latest` tag.
 
     $ sudo docker build -t bdlss/loris-grok-docker .
 
-### Start the container and test
+### Start the container
 
     $ docker run -d -p 5004:5004 bdlss/loris-grok-docker
+
+### Images
+
+Loris bundles with it's own test images. They are stored at `/usr/local/share/images/`.
+
+### Test
 
 Point your browser to `http://<Host or Container IP>:5004/01/02/0001.jp2/full/full/0/default.jpg`
 
