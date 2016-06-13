@@ -69,9 +69,10 @@ RUN mkdir /usr/local/share/images
 # Load example images
 RUN cp -R tests/img/* /usr/local/share/images/
 
-RUN ./setup.py install 
+# install loris conf and replace webapp.py (with 'opj' mod), run setup.py 
 COPY loris2.conf etc/loris2.conf
 COPY webapp.py loris/webapp.py
+RUN ./setup.py install 
 
 # get python validator framework
 RUN pip2.7 install bottle \
