@@ -1,8 +1,8 @@
-Docker build of Loris 2.0.1 IIIF Image Server with optimized OPENJPEG, Grok 1.0 on Ubuntu 14.04
+Docker build of Loris 2.0.1 IIIF Image Server with Grok 1.0 on Ubuntu 14.04
 ===========
 
 
-A Dockfile deployment of Loris image server with Grok @ https://github.com/GrokImageCompression/grok and https://github.com/loris-imageserver/loris
+A Dockfile deployment of Loris image server with optimized OPENJPEG, Grok @ https://github.com/GrokImageCompression/grok and https://github.com/loris-imageserver/loris
 
 Docker hub respository @ https://hub.docker.com/r/bdlss/loris-grok-docker/
 
