@@ -49,11 +49,11 @@ docker exec -it <container ID> /bin/bash
 
 Then for an image served at `http://localhost:5004/prefix/image_id` the validator can be run with:
 
-    $ /tmp/iiif-validate.py -s localhost:5004 -p prefix -i image_id --version=2.0 -v
+    $ python /tmp/iiif-validate.py -s localhost:5004 -p prefix -i image_id --version=2.0 -v
 
 e.g.
 
-    $ /tmp/iiif-validate.py -s localhost:5004 -p '01/02' -i 0001.jp2 --version=2.0 -v
+    $ python /tmp/iiif-validate.py -s localhost:5004 -p '01/02' -i 0001.jp2 --version=2.0 -v
 
 ### Documentation and examples
 
