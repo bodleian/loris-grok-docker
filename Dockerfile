@@ -76,7 +76,7 @@ COPY webapp.py loris/webapp.py
 # get python validator framework
 RUN pip2.7 install bottle \
     && pip2.7 install python-magic \
-    && pip2.7 install lxml \
+    && pip2.7 install lxml
 
 # get IIIF validator
 WORKDIR /tmp
