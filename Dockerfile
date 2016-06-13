@@ -17,7 +17,7 @@ RUN pip2.7 install configobj
 WORKDIR /tmp/cmake
 RUN wget http://www.cmake.org/files/v3.2/cmake-3.2.2.tar.gz && tar xf cmake-3.2.2.tar.gz && cd cmake-3.2.2 && ./configure && make && make install
 
-# Download and compile openjpeg2.1
+# Download and compile Grok tag v2.1.1
 WORKDIR /tmp/openjpeg
 RUN git clone https://github.com/GrokImageCompression/grok.git ./
 RUN git checkout tags/v2.1.1
